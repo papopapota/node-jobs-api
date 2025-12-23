@@ -458,6 +458,6 @@ components:
       type: http
       scheme: bearer
 servers:
-  - url: https://dev.your-api-server.com
+  - url: http://18.222.199.154/
     description: Develop Env
 security: []
