@@ -1,13 +1,13 @@
-openapi: 3.1.0
+openapi: 3.0.1
 info:
   title: Node JS project (express course)
   description: ''
   version: 1.0.0
 tags:
-  - name: Jobs API
-  - name: Jobs API/Auth
-  - name: Jobs API/Jobs
-  - name: Jobs API/Currency
+  - name: 06-Jobs-API
+  - name: 06-Jobs-API/Auth
+  - name: 06-Jobs-API/Jobs
+  - name: 06-Jobs-API/Currency
 paths:
   /auth/register:
     post:
@@ -15,7 +15,7 @@ paths:
       deprecated: false
       description: ''
       tags:
-        - Jobs API/Auth
+        - 06-Jobs-API/Auth
       parameters: []
       requestBody:
         content:
@@ -45,7 +45,6 @@ paths:
               schema:
                 type: object
                 properties: {}
-          headers: {}
       security: []
   /auth/login:
     post:
@@ -53,7 +52,7 @@ paths:
       deprecated: false
       description: ''
       tags:
-        - Jobs API/Auth
+        - 06-Jobs-API/Auth
       parameters: []
       requestBody:
         content:
@@ -79,7 +78,6 @@ paths:
               schema:
                 type: object
                 properties: {}
-          headers: {}
       security: []
   /jobs/:
     post:
@@ -87,7 +85,7 @@ paths:
       deprecated: false
       description: ''
       tags:
-        - Jobs API/Jobs
+        - 06-Jobs-API/Jobs
       parameters:
         - name: Authorization
           in: header
@@ -129,7 +127,7 @@ paths:
       deprecated: false
       description: ''
       tags:
-        - Jobs API/Jobs
+        - 06-Jobs-API/Jobs
       parameters:
         - name: Authorization
           in: header
@@ -162,7 +160,7 @@ paths:
       deprecated: false
       description: ''
       tags:
-        - Jobs API/Jobs
+        - 06-Jobs-API/Jobs
       parameters:
         - in: path
           name: id 
@@ -201,7 +199,7 @@ paths:
       deprecated: false
       description: ''
       tags:
-        - Jobs API/Jobs
+        - 06-Jobs-API/Jobs
       parameters:
         - in: path
           name: id 
@@ -250,7 +248,7 @@ paths:
       deprecated: false
       description: ''
       tags:
-        - Jobs API/Jobs
+        - 06-Jobs-API/Jobs
       parameters:
         - in: path
           name: id 
@@ -294,44 +292,13 @@ paths:
                 properties: {}
       security:
         - bearer: []
-  /currency/getCurrencies:
-    get:
-      summary: getCurrencies
-      deprecated: false
-      description: ''
-      tags:
-        - Jobs API/Currency
-      parameters:
-        - name: Authorization
-          in: header
-          description: ''
-          required: true
-          example: >-
-            Bearer
-            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXNlcm5hbWUiOiJqb2hhIiwiaWF0IjoxNzY0OTcwNDEzLCJleHAiOjE3Njc1NjI0MTN9.0z6tlTa1AZK_UJHJQqo2D3ry9DzYtwZi8Q8npjflJCg
-          schema:
-            type: string
-      requestBody:
-        content:
-          text/plain:
-            schema:
-              type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
-      security: []
   /currency/getCurrency_live:
     get:
       summary: getCurrenciesLive
       deprecated: false
       description: ''
       tags:
-        - Jobs API/Currency
+        - 06-Jobs-API/Currency
       parameters:
         - name: fromCurrency
           in: query
@@ -362,7 +329,7 @@ paths:
       deprecated: false
       description: ''
       tags:
-        - Jobs API/Currency
+        - 06-Jobs-API/Currency
       parameters:
         - name: fromCurrency
           in: query
@@ -393,7 +360,7 @@ paths:
       deprecated: false
       description: ''
       tags:
-        - Jobs API/Currency
+        - 06-Jobs-API/Currency
       parameters:
         - name: fromCurrency
           in: query
@@ -431,7 +398,7 @@ paths:
       deprecated: false
       description: ''
       tags:
-        - Jobs API/Currency
+        - 06-Jobs-API/Currency
       parameters:
         - name: api_key
           in: query
@@ -449,7 +416,37 @@ paths:
                 type: object
                 properties: {}
       security: []
-webhooks: {}
+  /currency/getCurrencies:
+    get:
+      summary: getCurrencies
+      deprecated: false
+      description: ''
+      tags:
+        - 06-Jobs-API/Currency
+      parameters:
+        - name: Authorization
+          in: header
+          description: ''
+          required: true
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXNlcm5hbWUiOiJqb2hhIiwiaWF0IjoxNzY0OTcwNDEzLCJleHAiOjE3Njc1NjI0MTN9.0z6tlTa1AZK_UJHJQqo2D3ry9DzYtwZi8Q8npjflJCg
+          schema:
+            type: string
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      security: []
 components:
   schemas: {}
   responses: {}
@@ -458,6 +455,6 @@ components:
       type: http
       scheme: bearer
 servers:
-  - url: /
+  - url: https://dev.your-api-server.com
     description: Develop Env
 security: []
