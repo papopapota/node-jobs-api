@@ -43,7 +43,7 @@ app.use(
 // extra packages
 
 /// routes
-app.use('/', (req, res) => {
+app.get('/', (req, res) => {
   res.send('<h1>Jobs API</h1><a href="/api/v1/docs">Documentation</a>');
 });
 app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
