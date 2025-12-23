@@ -1,0 +1,463 @@
+openapi: 3.1.0
+info:
+  title: Node JS project (express course)
+  description: ''
+  version: 1.0.0
+tags:
+  - name: Jobs API
+  - name: Jobs API/Auth
+  - name: Jobs API/Jobs
+  - name: Jobs API/Currency
+paths:
+  /auth/register:
+    post:
+      summary: register
+      deprecated: false
+      description: ''
+      tags:
+        - Jobs API/Auth
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - name
+                - email
+                - password
+            example:
+              name: Daniel
+              email: daniel@gmail.com
+              password: secret
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          headers: {}
+      security: []
+  /auth/login:
+    post:
+      summary: Login User
+      deprecated: false
+      description: ''
+      tags:
+        - Jobs API/Auth
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - email
+                - password
+            example:
+              email: john8@gmail.com
+              password: secret
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          headers: {}
+      security: []
+  /jobs/:
+    post:
+      summary: Create Job
+      deprecated: false
+      description: ''
+      tags:
+        - Jobs API/Jobs
+      parameters:
+        - name: Authorization
+          in: header
+          description: ''
+          required: false
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTQ2ZGMwOWQ1YzAxNjM3YmMxZDhjNmYiLCJuYW1lIjoiam9objgiLCJpYXQiOjE3NjYzMzM2MDIsImV4cCI6MTc2ODkyNTYwMn0.qvIr30yVkDOljz62b2gqyWhM11SCG5xO4W3Wquvvw3A
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                company:
+                  type: string
+                position:
+                  type: string
+              required:
+                - company
+                - position
+            example:
+              company: Netflix
+              position: Backend Developer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      security:
+        - bearer: []
+    get:
+      summary: Get all Jobs
+      deprecated: false
+      description: ''
+      tags:
+        - Jobs API/Jobs
+      parameters:
+        - name: Authorization
+          in: header
+          description: ''
+          required: false
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTQ2ZGMwOWQ1YzAxNjM3YmMxZDhjNmYiLCJuYW1lIjoiam9objgiLCJpYXQiOjE3NjYzMzM2MDIsImV4cCI6MTc2ODkyNTYwMn0.qvIr30yVkDOljz62b2gqyWhM11SCG5xO4W3Wquvvw3A
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      security:
+        - bearer: []
+  /jobs/{id}:
+    get:
+      summary: Get Job
+      deprecated: false
+      description: ''
+      tags:
+        - Jobs API/Jobs
+      parameters:
+        - in: path
+          name: id 
+          required: true
+          schema:
+            type: string
+            minimum: 1
+          description: The job ID
+        - name: Authorization
+          in: header
+          description: ''
+          required: false
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTQ2ZGMwOWQ1YzAxNjM3YmMxZDhjNmYiLCJuYW1lIjoiam9objgiLCJpYXQiOjE3NjYzMzM2MDIsImV4cCI6MTc2ODkyNTYwMn0.qvIr30yVkDOljz62b2gqyWhM11SCG5xO4W3Wquvvw3A
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      security:
+        - bearer: []
+    patch:
+      summary: update Job
+      deprecated: false
+      description: ''
+      tags:
+        - Jobs API/Jobs
+      parameters:
+        - in: path
+          name: id 
+          required: true
+          schema:
+            type: string
+            minimum: 1
+          description: The job ID
+        - name: Authorization
+          in: header
+          description: ''
+          required: false
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTQ2ZGMwOWQ1YzAxNjM3YmMxZDhjNmYiLCJuYW1lIjoiam9objgiLCJpYXQiOjE3NjYzMzM2MDIsImV4cCI6MTc2ODkyNTYwMn0.qvIr30yVkDOljz62b2gqyWhM11SCG5xO4W3Wquvvw3A
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                company:
+                  type: string
+                position:
+                  type: string
+              required:
+                - company
+                - position
+            example:
+              company: randomsss
+              position: Full Stack Developer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      security:
+        - bearer: []
+    delete:
+      summary: Delete Job
+      deprecated: false
+      description: ''
+      tags:
+        - Jobs API/Jobs
+      parameters:
+        - in: path
+          name: id 
+          required: true
+          schema:
+            type: string
+            minimum: 1
+          description: The job ID
+        - name: Authorization
+          in: header
+          description: ''
+          required: false
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTQ2ZGMwOWQ1YzAxNjM3YmMxZDhjNmYiLCJuYW1lIjoiam9objgiLCJpYXQiOjE3NjYzMzM2MDIsImV4cCI6MTc2ODkyNTYwMn0.qvIr30yVkDOljz62b2gqyWhM11SCG5xO4W3Wquvvw3A
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                company:
+                  type: string
+                position:
+                  type: string
+              required:
+                - company
+                - position
+            example:
+              company: randomsss
+              position: Full Stack Developer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      security:
+        - bearer: []
+  /currency/getCurrencies:
+    get:
+      summary: getCurrencies
+      deprecated: false
+      description: ''
+      tags:
+        - Jobs API/Currency
+      parameters:
+        - name: Authorization
+          in: header
+          description: ''
+          required: true
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXNlcm5hbWUiOiJqb2hhIiwiaWF0IjoxNzY0OTcwNDEzLCJleHAiOjE3Njc1NjI0MTN9.0z6tlTa1AZK_UJHJQqo2D3ry9DzYtwZi8Q8npjflJCg
+          schema:
+            type: string
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      security: []
+  /currency/getCurrency_live:
+    get:
+      summary: getCurrenciesLive
+      deprecated: false
+      description: ''
+      tags:
+        - Jobs API/Currency
+      parameters:
+        - name: fromCurrency
+          in: query
+          description: ''
+          required: true
+          example: EUR
+          schema:
+            type: string
+        - name: toCurrency
+          in: query
+          description: ''
+          required: true
+          example: USD
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      security: []
+  /currency/getThickHistoricalRates:
+    get:
+      summary: getThickHistoricalRates
+      deprecated: false
+      description: ''
+      tags:
+        - Jobs API/Currency
+      parameters:
+        - name: fromCurrency
+          in: query
+          description: ''
+          required: true
+          example: USD
+          schema:
+            type: string
+        - name: toCurrency
+          in: query
+          description: ''
+          required: true
+          example: EUR
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      security: []
+  /currency/getHistoricalRates:
+    get:
+      summary: getHistoricalRates Copy
+      deprecated: false
+      description: ''
+      tags:
+        - Jobs API/Currency
+      parameters:
+        - name: fromCurrency
+          in: query
+          description: ''
+          required: true
+          example: USD
+          schema:
+            type: string
+        - name: toCurrency
+          in: query
+          description: ''
+          required: true
+          example: EUR
+          schema:
+            type: string
+        - name: date
+          in: query
+          description: ''
+          required: true
+          example: '2019-10-09'
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      security: []
+  /api/v1/tick_historical/GBPUSD/2025-04-10-08:30/2025-04-10-09:00:
+    get:
+      summary: getThickHistoricalRates Copy
+      deprecated: false
+      description: ''
+      tags:
+        - Jobs API/Currency
+      parameters:
+        - name: api_key
+          in: query
+          description: ''
+          required: true
+          example: nrGUH1fgpGN3pKh4F4II
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      security: []
+webhooks: {}
+components:
+  schemas: {}
+  responses: {}
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+servers:
+  - url: https://dev.your-api-server.com
+    description: Develop Env
+security: []
