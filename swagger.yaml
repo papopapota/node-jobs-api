@@ -455,6 +455,6 @@ components:
       type: http
       scheme: bearer
 servers:
-  - url: https://dev.your-api-server.com
-    description: Develop Env
+  - url: http://localhost/api/v1
+    description: Local environment
 security: []
