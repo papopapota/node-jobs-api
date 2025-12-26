@@ -3,12 +3,6 @@ require('express-async-errors');
 const express = require('express');
 const app = express();
 
-//security packages////
-const helmet = require('helmet');
-const cors = require('cors');
-const xss = require('xss-clean');
-const rateLimiter = require('express-rate-limit');
-
 //swagger
 const swaggerUI = require('swagger-ui-express');
 const YAML = require('yamljs');
@@ -20,6 +14,12 @@ swaggerDocument.servers = [
     description: 'API',
   },
 ];
+//security packages////
+const helmet = require('helmet');
+const cors = require('cors');
+const xss = require('xss-clean');
+const rateLimiter = require('express-rate-limit');
+
 
 //connect to db
 const connectDB = require('./db/connect');
