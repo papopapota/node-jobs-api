@@ -37,6 +37,7 @@ const errorHandlerMiddleware = require('./middleware/error-handler');
 
 app.set('trust proxy', 1);
 
+app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 app.use(express.json());
 app.use(helmet());
 app.use(cors());
@@ -53,7 +54,6 @@ app.use(
 app.get('/', (req, res) => {
   res.send('<h1>Jobs API</h1><a href="/api/v1/docs">Documentation</a>');
 });
-app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 // routes
 app.use('/api/v1/jobs', authenticateUser, jobsRouter);
