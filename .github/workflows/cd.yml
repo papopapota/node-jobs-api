@@ -7,7 +7,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    environment: prod
     steps:
       - name: SSH deploy
         uses: appleboy/ssh-action@v1
