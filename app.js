@@ -16,8 +16,8 @@ const swaggerDocument = YAML.load('./swagger.yaml');
 
 swaggerDocument.servers = [
   {
-    url: process.env.BASE_URL,
-    description: `${process.env.NODE_ENV} environment`,
+    url: '/api/v1',
+    description: 'API',
   },
 ];
 
