@@ -3,14 +3,13 @@ version: "3.9"
 services:
   api:
     build: .
-    container_name: jobs-api
+    image: papopapota/jobs-api:latest
     env_file:
       - .env.prod
     restart: unless-stopped
 
   nginx:
     image: nginx:alpine
-    container_name: jobs-nginx
     ports:
       - "80:80"
     volumes:
