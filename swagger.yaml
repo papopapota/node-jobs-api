@@ -454,7 +454,7 @@ components:
     bearer:
       type: http
       scheme: bearer
-servers:
-  - url: http://localhost/api/v1
-    description: Local environment
+# servers:
+#   - url: http://localhost/api/v1
+#     description: Local environment
 security: []

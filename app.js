@@ -14,6 +14,13 @@ const swaggerUI = require('swagger-ui-express');
 const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./swagger.yaml');
 
+swaggerDocument.servers = [
+  {
+    url: process.env.BASE_URL,
+    description: `${process.env.NODE_ENV} environment`,
+  },
+];
+
 //connect to db
 const connectDB = require('./db/connect');
 
@@ -57,6 +64,12 @@ app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
 const port = process.env.PORT || 3000;
+
+/// Variable env configuration
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV} || "local"`
+});
+
 
 const start = async () => {
   try {
