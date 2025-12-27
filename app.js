@@ -45,7 +45,11 @@ app.get('/', (req, res) => {
   `);
 });
 app.use(express.json());
-//app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 app.use(cors());
 app.use(xss());
 app.use(
