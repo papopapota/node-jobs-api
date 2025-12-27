@@ -27,4 +27,4 @@ jobs:
           push: true
           tags: |
             papopapota/jobs-api:${{ github.ref_name }}
-            papopapota/jobs-api:latest
+            # papopapota/jobs-api:latest
