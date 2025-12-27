@@ -39,7 +39,11 @@ app.set('trust proxy', 1);
 
 app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 app.use(express.json());
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: { directives: { upgradeInsecureRequests: null } },
+  }),
+);
 app.use(cors());
 app.use(xss());
 app.use(
