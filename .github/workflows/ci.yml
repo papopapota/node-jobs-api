@@ -10,6 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
     steps:
+      - name: Check secrets
+        run: |
+        echo "Docker user is set: ${{ secrets.DOCKER_USERNAME != '' }}"
+
+
       - uses: actions/checkout@v4
 
       - name: Login Docker
