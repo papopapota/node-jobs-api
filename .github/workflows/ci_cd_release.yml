@@ -44,7 +44,7 @@ jobs:
           script: |
             cd ~/deploy
             # Actualizamos la versión en el docker-compose
-            sed -i "s|image: papopapota/jobs-api:.*|image: papopapota/jobs-api:${{ github.ref_name }}|" docker-compose.prod.yml
+            sed -i "s|image: papopapota/jobs-api:.*|image: papopapota/jobs-api:${{ github.ref_name }}|" docker-compose.yml
             
             # Bajamos la nueva imagen
             docker compose pull jobs-api
