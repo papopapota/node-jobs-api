@@ -1,0 +1,56 @@
+name: CI/CD Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  # Job 1: Construir y subir imagen
+  build:
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login Docker
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build & Push RELEASE
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          # Es buena práctica pushear el tag específico Y 'latest'
+          tags: |
+            papopapota/jobs-api:${{ github.ref_name }}
+            papopapota/jobs-api:latest
+
+  # Job 2: Desplegar (Solo corre si 'build' fue exitoso)
+  deploy:
+    needs: build # <--- ESTA ES LA CLAVE
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - name: SSH deploy
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            cd ~/deploy
+            # Actualizamos la versión en el docker-compose
+            sed -i "s|image: papopapota/jobs-api:.*|image: papopapota/jobs-api:${{ github.ref_name }}|" docker-compose.prod.yml
+            
+            # Bajamos la nueva imagen
+            docker compose pull jobs-api
+            
+            # Recreamos solo el contenedor que cambió
+            docker compose up -d jobs-api
+            
+            # Limpieza opcional de imágenes viejas para no llenar el disco
+            docker image prune -f
