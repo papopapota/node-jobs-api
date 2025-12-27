@@ -12,8 +12,7 @@ jobs:
     steps:
       - name: Check secrets
         run: |
-        echo "Docker user is set: ${{ secrets.DOCKER_USERNAME != '' }}"
-
+          echo "Docker user is set: ${{ secrets.DOCKER_USERNAME != '' }}"
 
       - uses: actions/checkout@v4
 
