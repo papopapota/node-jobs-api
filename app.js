@@ -14,7 +14,7 @@ swaggerDocument.servers = [
     description: 'API',
   },
 ];
-//security packages//////
+//security packages////
 const helmet = require('helmet');
 const cors = require('cors');
 const xss = require('xss-clean');
