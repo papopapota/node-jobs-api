@@ -76,8 +76,7 @@ jobs:
             echo " App is unhealthy"
             # Revertir al contenedor anterior
             sed -i "s|image: papopapota/jobs-api:.*|image: $PREVIOUS_IMAGE|" docker-compose.yml
-            #docker compose pull jobs-api
-            docker compose up -d jobs-api
+            docker compose up -d 
             
             exit 1
       
