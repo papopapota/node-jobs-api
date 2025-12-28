@@ -54,23 +54,20 @@ jobs:
             
             # Limpieza opcional de imágenes viejas para no llenar el disco
             docker image prune -f
+
+            #healthcheck
+            for i in {1..12}; do
+              STATUS=$(docker inspect --format='{{.State.Health.Status}}' deploy-jobs-api-1 2>/dev/null || echo "starting")
+              echo "Health: $STATUS"
+
+              if [ "$STATUS" = "healthy" ]; then
+                echo "✅ App is healthy"
+                exit 0
+              fi
+
+              sleep 5
+            done
+
+            echo "❌ App is unhealthy"
+            exit 1
       
-      - name: Wait for healthcheck
-        run: |
-          for i in {1..12}; do
-            STATUS=$(ssh -o StrictHostKeyChecking=no \
-              ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
-              "docker inspect --format='{{.State.Health.Status}}' deploy-jobs-api-1" || echo "starting")
-
-            echo "Health: $STATUS"
-
-            if [ "$STATUS" = "healthy" ]; then
-              echo "App is healthy ✅"
-              exit 0
-            fi
-
-            sleep 5
-          done
-
-          echo "App is unhealthy ❌"
-          exit 1
