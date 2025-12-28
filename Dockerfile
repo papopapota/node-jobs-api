@@ -2,7 +2,7 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y curl
+RUN apk add --no-cache curl
 
 COPY package*.json ./
 RUN npm install --production
