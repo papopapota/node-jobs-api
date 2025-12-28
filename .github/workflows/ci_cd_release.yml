@@ -57,7 +57,7 @@ jobs:
 
             #healthcheck
             for i in {1..12}; do
-              STATUS=$(docker inspect --format='{{.State.Health.Status}}' jobs-api 2>/dev/null || echo "starting")
+              STATUS=$(docker inspect --format='{{.State.Health.Status}}' deploy-jobs-api-1 2>/dev/null || echo "starting")
               echo "Health: $STATUS"
 
               if [ "$STATUS" = "healthy" ]; then
