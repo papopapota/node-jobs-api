@@ -44,6 +44,8 @@ app.get('/', (req, res) => {
     <a href="http://${req.headers.host}/api/v1/docs">Documentation</a>
   `);
 });
+
+// middlewares security
 app.use(express.json());
 app.use(
   helmet({
@@ -58,25 +60,32 @@ app.use(
     max: 100, // limit each IP to 100 requests per windowMs
   })
 );
-// extra packages
-
-/// routes
 
 // routes
 app.use('/api/v1/jobs', authenticateUser, jobsRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/currency', callCurrencyRouter);
 
+// middlewares
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
-const port = process.env.PORT || 3000;
+//health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({
+    status: 'ok',
+    uptime: process.uptime(),
+    timestamp: Date.now(),
+  });
+});
+
 
 /// Variable env configuration
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV} || "local"`
 });
 
+const port = process.env.PORT || 3000;
 
 const start = async () => {
   try {
