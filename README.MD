@@ -346,7 +346,7 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 
 ## 👥 Autor
 
-Tu Nombre - [@papopapota](https://github.com/papopapota)
+Papopapota - [@papopapota](https://github.com/papopapota)
 
 ## 🔗 Enlaces
 
