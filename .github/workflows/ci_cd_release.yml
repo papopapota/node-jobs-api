@@ -43,6 +43,11 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           script: |
             cd ~/deploy
+
+            #guardamos la version actual
+            PREVIOUS_IMAGE=$(grep "image: papopapota/jobs-api" docker-compose.yml | awk '{print $2}')
+            echo "Versión actual: $PREVIOUS_IMAGE"
+
             # Actualizamos la versión en el docker-compose
             sed -i "s|image: papopapota/jobs-api:.*|image: papopapota/jobs-api:${{ github.ref_name }}|" docker-compose.yml
             
@@ -51,9 +56,6 @@ jobs:
             
             # Recreamos solo el contenedor que cambió
             docker compose up -d jobs-api
-            
-            # Limpieza opcional de imágenes viejas para no llenar el disco
-            docker image prune -f
 
             #healthcheck
             for i in {1..12}; do
@@ -61,13 +63,21 @@ jobs:
               echo "Health: $STATUS"
 
               if [ "$STATUS" = "healthy" ]; then
-                echo "✅ App is healthy"
+                echo " App is healthy"
+
+                # Limpieza opcional de imágenes viejas para no llenar el disco
+                docker image prune -f
                 exit 0
               fi
 
               sleep 5
             done
 
-            echo "❌ App is unhealthy"
+            echo " App is unhealthy"
+            # Revertir al contenedor anterior
+            sed -i "s|image: papopapota/jobs-api:.*|image: $PREVIOUS_IMAGE|" docker-compose.yml
+            #docker compose pull jobs-api
+            docker compose up -d jobs-api
+            
             exit 1
       

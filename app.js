@@ -78,6 +78,9 @@ app.get('/health', (req, res) => {
     timestamp: Date.now(),
   });
 });
+
+throw new Error("Boom");
+
 // middlewares
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
