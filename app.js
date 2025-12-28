@@ -79,7 +79,6 @@ app.get('/health', (req, res) => {
   });
 });
 
-throw new Error("Boom");
 
 // middlewares
 app.use(notFoundMiddleware);
