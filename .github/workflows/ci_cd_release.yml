@@ -24,14 +24,14 @@ jobs:
         with:
           context: .
           push: true
-          # Es buena práctica pushear el tag específico Y 'latest'
+          #  pushear el tag específico Y 'latest'
           tags: |
             papopapota/jobs-api:${{ github.ref_name }}
             papopapota/jobs-api:latest
 
   # Job 2: Desplegar (Solo corre si 'build' fue exitoso)
   deploy:
-    needs: build # <--- ESTA ES LA CLAVE
+    needs: build # Asegura que 'build' termine primero
     runs-on: ubuntu-latest
     environment: prod
     steps:
