@@ -42,7 +42,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
-            cd ~/deploy
+            cd ~/apps/jobs-api
 
             #guardamos la version actual
             PREVIOUS_IMAGE=$(grep "image: papopapota/jobs-api" docker-compose.yml | awk '{print $2}')
