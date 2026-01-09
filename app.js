@@ -26,7 +26,7 @@ const rateLimiter = require('express-rate-limit');
 
 
 //connect to db
-const connectDB = require('./db/connect');
+const {connectDB, healthCheckDB} = require('./db/connect');
 
 //
 const authenticateUser = require('./middleware/authentication');
@@ -77,6 +77,14 @@ app.get('/health', (req, res) => {
     uptime: process.uptime(),
     timestamp: Date.now(),
   });
+});
+app.get('/health/db', async (req, res) => {
+  try {
+    await healthCheckDB();
+    res.status(200).json({ db: 'up' });
+  } catch {
+    res.status(503).json({ db: 'down' });
+  }
 });
 
 
