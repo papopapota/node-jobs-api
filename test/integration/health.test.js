@@ -1,8 +1,13 @@
 const request = require('supertest');
+
+// Mock the database connection before requiring the app
+jest.mock('../../db/connect', () => ({
+  connectDB: jest.fn().mockResolvedValue(true),
+  healthCheckDB: jest.fn().mockResolvedValue({ ok: 1 })
+}));
+
 const app = require('../../app');
-require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV} || "local"`
-});
+
 describe('GET /health', () => {
   it('should return 200 and status ok', async () => {
     const res = await request(app).get('/health');
