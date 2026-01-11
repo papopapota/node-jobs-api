@@ -11,7 +11,7 @@ const connectDB = (url) => {
 
 const healthCheckDB = async () => {
   if (mongoose.connection.readyState !== 1) {
-    throw new Error('Mongo not connected');
+    throw new Error('MongoDB is not connected');
   }
   return await mongoose.connection.db.admin().ping();
 };

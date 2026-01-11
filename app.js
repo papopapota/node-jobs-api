@@ -26,7 +26,7 @@ const rateLimiter = require('express-rate-limit');
 
 
 //connect to db
-const {connectDB, healthCheckDB} = require('./db/connect');
+const { connectDB, healthCheckDB } = require('./db/connect');
 
 //
 const authenticateUser = require('./middleware/authentication');
@@ -98,12 +98,17 @@ const port = process.env.PORT || 3000;
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI);
-    app.listen(port, () =>
-      console.log(`Server is listening on port ${port}...`)
-    );
+    if (process.env.NODE_ENV !== 'test') {
+      app.listen(port, () =>
+        console.log(`Server is listening on port ${port}...`)
+      );
+    }
+
   } catch (error) {
     console.log(error);
   }
 };
 
 start();
+
+module.exports = app;
