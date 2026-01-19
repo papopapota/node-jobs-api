@@ -9,7 +9,7 @@ const swaggerDocument = YAML.load('./swagger.yaml');
 
 /// Variable env configuration
 require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV} || "local"`
+  path: `.env.${process.env.NODE_ENV || "local"}`
 });
 
 swaggerDocument.servers = [
