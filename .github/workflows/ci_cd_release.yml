@@ -66,12 +66,6 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
-            #variables de entorno
-            export MONGO_URI=${{ secrets.MONGO_URI }}
-            export JWT_SECRET=${{ secrets.JWT_SECRET }}
-            export JWT_LIFETIME=${{ secrets.JWT_LIFETIME }}
-            export PORT=${{ secrets.PORT }}
-            export TRADERMADE_API_KEY=${{ secrets.TRADERMADE_API_KEY }}
 
             cd ~/apps/jobs-api
 
@@ -86,6 +80,11 @@ jobs:
             docker compose pull jobs-api
             
             # Recreamos solo el contenedor que cambió
+            MONGO_URI="${{ secrets.MONGO_URI }}" \
+            JWT_SECRET="${{ secrets.JWT_SECRET }}" \
+            JWT_LIFETIME="${{ secrets.JWT_LIFETIME }}" \
+            PORT="${{ secrets.PORT }}" \
+            TRADERMADE_API_KEY="${{ secrets.TRADERMADE_API_KEY }}" \
             docker compose up -d jobs-api
 
             #healthcheck
