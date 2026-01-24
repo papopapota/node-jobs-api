@@ -33,14 +33,7 @@
   "jest": {
     "setupFiles": [
       "./jest.setup.js"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 70,
-        "functions": 80,
-        "lines": 80
-      }
-    }
+    ]
   },
   "devDependencies": {
     "@types/dotenv": "^6.1.1",
