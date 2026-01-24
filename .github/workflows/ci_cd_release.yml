@@ -25,6 +25,7 @@ jobs:
         env:
           NODE_ENV: test
           JWT_SECRET: testsecret
+          JWT_LIFETIME: 1d
         run: |
           npm test
           npm run test:coverage
