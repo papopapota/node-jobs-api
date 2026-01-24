@@ -2,9 +2,14 @@
 services:
   jobs-api:
     image: papopapota/jobs-api:v1.1.29
-    env_file:
-      - .env.prod
     restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      MONGO_URI: ${MONGO_URI}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_LIFETIME: ${JWT_LIFETIME}
+      PORT: ${PORT}
+      TRADERMADE_API_KEY: ${TRADERMADE_API_KEY}
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
       interval: 30s

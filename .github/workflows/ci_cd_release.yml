@@ -6,8 +6,31 @@ on:
       - "v*"
 
 jobs:
-  # Job 1: Construir y subir imagen
+  # Job 1: test
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run unit & integration tests
+        env:
+          node_env: test
+          jwt_secret: testsecret
+        run: |
+          npm test
+          npm run test:coverage
+  # Job 2: Construir y subir imagen
   build:
+    needs: test
     runs-on: ubuntu-latest
     environment: prod
     steps:
@@ -29,9 +52,9 @@ jobs:
             papopapota/jobs-api:${{ github.ref_name }}
             papopapota/jobs-api:latest
 
-  # Job 2: Desplegar (Solo corre si 'build' fue exitoso)
+  # Job 3: Desplegar (Solo corre si 'build' fue exitoso)
   deploy:
-    needs: build # Asegura que 'build' termine primero
+    needs: build
     runs-on: ubuntu-latest
     environment: prod
     steps:
@@ -42,6 +65,13 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
+            #variables de entorno
+            export MONGO_URI=${{ secrets.MONGO_URI }}
+            export JWT_SECRET=${{ secrets.JWT_SECRET }}
+            export JWT_LIFETIME=${{ secrets.JWT_LIFETIME }}
+            export PORT=${{ secrets.PORT }}
+            export TRADERMADE_API_KEY=${{ secrets.TRADERMADE_API_KEY }}
+
             cd ~/apps/jobs-api
 
             #guardamos la version actual

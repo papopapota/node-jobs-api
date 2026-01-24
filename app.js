@@ -8,9 +8,12 @@ const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./swagger.yaml');
 
 /// Variable env configuration
-require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV || "local"}`
-});
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config({
+    path: `.env.${process.env.NODE_ENV || 'local'}`
+  });
+}
+
 
 swaggerDocument.servers = [
   {
