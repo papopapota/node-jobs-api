@@ -1,4 +1,4 @@
-# 💼 Jobs API
+# 💼 Jobs API RESTful API con Node.js, Docker, y CI/CD pipelines a AWS.
 
 ![Node.js](https://img.shields.io/badge/Node.js-v18-green.svg)
 ![Express](https://img.shields.io/badge/Express.js-Backend-lightgrey.svg)
