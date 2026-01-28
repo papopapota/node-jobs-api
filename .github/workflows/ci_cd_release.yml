@@ -80,11 +80,6 @@ jobs:
             docker compose pull jobs-api
             
             # Recreamos solo el contenedor que cambió
-            MONGO_URI="${{ secrets.MONGO_URI }}" \
-            JWT_SECRET="${{ secrets.JWT_SECRET }}" \
-            JWT_LIFETIME="${{ secrets.JWT_LIFETIME }}" \
-            PORT="${{ secrets.PORT }}" \
-            TRADERMADE_API_KEY="${{ secrets.TRADERMADE_API_KEY }}" \
             docker compose up -d jobs-api
 
             #healthcheck
