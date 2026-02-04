@@ -7,7 +7,7 @@ const swaggerUI = require('swagger-ui-express');
 const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./swagger.yaml');
 
-/// Variable env configuration
+/// Variable env configuration ////
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config({
     path: `.env.${process.env.NODE_ENV || 'local'}`
