@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: Node JS project (express course)
+  title: Node JS Jobs API
   description: ''
   version: 1.0.0
 tags:
